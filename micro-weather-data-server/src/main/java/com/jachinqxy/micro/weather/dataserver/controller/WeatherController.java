@@ -26,7 +26,7 @@ public class WeatherController {
 	}
 
 	@GetMapping("/cityCode/{cityCode}")
-	public WeatherResponse getReportByCityName(@PathVariable("cityCode") String cityCode) {
+	public WeatherResponse getReportByCityCode(@PathVariable("cityCode") String cityCode) {
 		return weatherDataService.getDataByCityCode(cityCode);
 	}
 
