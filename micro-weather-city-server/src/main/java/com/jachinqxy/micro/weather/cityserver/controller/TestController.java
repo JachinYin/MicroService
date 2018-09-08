@@ -4,16 +4,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Hello Controller.
+ * Test Controller.
  * @since 2018年07月30日
  * @author Jachin
  */
 @RestController
-public class HelloController {
+public class TestController {
 
-	@RequestMapping("/hello")
+	@RequestMapping("/test")
 	public String hello() {
-	    return "Hello World! Welcome to visit waylau.com!";
+	    return "Success!";
 	}
 
 }
