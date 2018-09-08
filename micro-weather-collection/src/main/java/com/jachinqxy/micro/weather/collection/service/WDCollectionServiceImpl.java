@@ -27,8 +27,6 @@ public class WDCollectionServiceImpl implements WDCollectionService {
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
 
-	private String a ="beijing";
-
 	private final String WEATHER_API =
 			"https://api.seniverse.com/v3/weather/daily.json?key=zqbbicypcfaq5y1v&location=";
 	private final String suffix = "&start=0&days=5";
@@ -41,23 +39,28 @@ public class WDCollectionServiceImpl implements WDCollectionService {
 		logger.info("Start 同步天气.cityId:"+cityKey);
 
 		String uri = WEATHER_API + cityKey + suffix;
-		this.saveWeatherData(uri);
+		this.saveWeatherData(uri, cityKey);
 		
 		logger.info("End 同步天气");
 	}
 	
-	private void saveWeatherData(String uri) {
+	private void saveWeatherData(String uri,String city) {
 		ValueOperations<String, String> ops = this.stringRedisTemplate.opsForValue();
 		String key = uri;
 		String strBody = null;
- 
-		ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-		
-		if (response.getStatusCodeValue() == 200) {
-			strBody = response.getBody();
-		}
 
-		ops.set(key, strBody, TIME_OUT, TimeUnit.SECONDS);
+		try {
+
+			ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+
+			if (response.getStatusCodeValue() == 200) {
+				strBody = response.getBody();
+			}
+
+			ops.set(key, strBody, TIME_OUT, TimeUnit.SECONDS);
+		}catch (Exception e){
+			logger.info("没有该城市的数据",city);
+		}
 	}
 
 }
