@@ -20,10 +20,10 @@
 		</div>
 		<div class="row">
 			<h1 class="text-success" th:text="${reportModel.report.location.name}"></h1>
-			<select class="custom-select" id="selectCityId">
+			<select class="custom-select" id="selectCityCode">
 				<option th:each="city : ${reportModel.cityList}"
-						th:value="${city.cityId}" th:text="${city.cityName}"
-						th:selected="${city.cityId eq reportModel.cityId}">city</option>
+						th:value="${city.cityCode}" th:text="${city.cityName}"
+						th:selected="${city.cityCode eq reportModel.cityCode}">city</option>
 			</select>
 		</div>
 		<div class="row">

@@ -9,9 +9,9 @@
 
 // DOM 加载完再执行
 $(function() {
-	$("#selectCityId").change(function(){
-		var cityId=$("#selectCityId").val();  //获取Select选择的Value
-		var url = '/report/cityId/' + cityId;
+	$("#selectCityCode").change(function(){
+		var cityCode=$("#selectCityCode").val();  //获取Select选择的Value
+		var url = '/report/cityCode/' + cityCode;
 		window.location.href= url;
 	});
 });
