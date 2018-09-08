@@ -4,8 +4,8 @@ buildscript {
     }
     repositories {
         // 配置镜像下载地址
-        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenLocal()
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenCentral()
     }
     dependencies {
@@ -19,16 +19,29 @@ apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.jahcinqxy'
-version = '0.0.1-SNAPSHOT'
+version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
+    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     mavenCentral()
 }
-
+ext {
+    springCloudVersion = 'Finchley.SR1'
+}
 
 dependencies {
+    // Feign
+    compile('org.springframework.cloud:spring-cloud-starter-openfeign')
+    // eureka client
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
     compile('org.springframework.boot:spring-boot-starter-web')
     testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
