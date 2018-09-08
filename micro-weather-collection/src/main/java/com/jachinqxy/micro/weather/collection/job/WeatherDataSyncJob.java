@@ -1,5 +1,6 @@
 package com.jachinqxy.micro.weather.collection.job;
 
+import com.jachinqxy.micro.weather.collection.service.CityApplication;
 import com.jachinqxy.micro.weather.collection.service.WDCollectionService;
 import com.jachinqxy.micro.weather.collection.vo.City;
 import org.quartz.JobExecutionContext;
@@ -9,7 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,29 +24,28 @@ public class WeatherDataSyncJob extends QuartzJobBean {
 
 	@Autowired
 	private WDCollectionService WDCollectionService;
-	
+
+	// 注入城市API服务的客户端应用
+	@Autowired
+	private CityApplication city;
+
 	@Override
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
-		logger.info("Start 天气数据同步任务");
+		logger.info("【天气数据同步任务】开始：");
 		
-		// TODO 改为由城市数据API微服务来提供数据
-		
+		// 由城市数据API微服务来提供数据
 		List<City> cityList = null;
 		try {
-			// TODO 调用城市数据API
-			cityList = new ArrayList<>();
-			City city = new City();
-			city.setCityCode("beijing");
-			cityList.add(city);
-			
+			//调用城市数据API
+				cityList = city.getCityIdList();
 		} catch (Exception e) {
 			logger.error("获取城市信息异常！", e);
 			throw new RuntimeException("获取城市信息异常！", e);
 		}
-		
+		logger.info("城市列表获取成功，下面开始同步每个城市天气数据。");
 		for (City city : cityList) {
 			String cityCode = city.getCityCode();
-			logger.info("天气数据同步任务中，cityId:" + cityCode);
+			logger.info("天气数据同步任务中，cityCode:" + cityCode);
 			
 			// 根据城市 Code 同步天气数据
 			WDCollectionService.syncDataByCityKey(cityCode);
