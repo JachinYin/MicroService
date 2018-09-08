@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>简易天气预报</title>
+
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<h3 th:text="${reportModel.title}">Jachin</h3>
+		</div>
+		<div class="row">
+			<h1 class="text-success" th:text="${reportModel.report.location.name}"></h1>
+			<select class="custom-select" id="selectCityId">
+				<option th:each="city : ${reportModel.cityList}"
+						th:value="${city.cityId}" th:text="${city.cityName}"
+						th:selected="${city.cityId eq reportModel.cityId}">city</option>
+			</select>
+		</div>
+		<div class="row">
+			<p>
+				时区：<span th:text="${reportModel.report.location.timezone}"></span>
+			</p>
+			<p>
+				&emsp;最后更新：<span th:text="${reportModel.report.last_update}"></span>
+			</p>
+
+		</div>
+
+
+		<div class="row">
+			<div class="card border-info" th:each="daily : ${reportModel.report.daily}">
+				<div class="card-body text-info">
+					<p class="card-text">
+						时间：<span  th:text="${daily.date}">2018-09-07</span>
+					</p>
+					<p class="card-text">
+						白昼天气：<span  th:text="${daily.text_day}">晴转多云</span>
+					</p>
+					<p class="card-text">
+						最高温：<span  th:text="${daily.high}">高温 28℃</span>
+					</p>
+					<p class="card-text">
+						最低温：<span  th:text="${daily.low}">低温 21℃</span>
+					</p>
+					<p class="card-text">
+						风向：<span  th:text="${daily.wind_direction}">无持续风向微风</span>
+					</p>
+					<p class="card-text">
+						风速：<span  th:text="${daily.wind_speed}">16</span>
+					</p>
+					<p class="card-text">
+						风力等级：<span  th:text="${daily.wind_scale}">2</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+		integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+		integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+		crossorigin="anonymous"></script>
+	<script th:src="@{/js/weather/report.js}"></script>
+</body>
+</html>
