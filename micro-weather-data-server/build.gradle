@@ -3,6 +3,9 @@ buildscript {
         springBootVersion = '2.0.4.RELEASE'
     }
     repositories {
+        // 配置镜像下载地址
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
