@@ -17,9 +17,10 @@ import java.util.List;
 //@Service
 public interface DataService {
 
-    @GetMapping("/cities")
+    // /city/cities 对应 zuul 配置文件中的 /city/**
+    @GetMapping("/city/cities")
     public List<City> getCityIdList() throws Exception;
 
-    @GetMapping("/weather/cityCode/{cityCode}")
+    @GetMapping("/data/weather/cityCode/{cityCode}")
     public WeatherResponse getReportByCityCode(@PathVariable("cityCode") String cityCode);
 }
