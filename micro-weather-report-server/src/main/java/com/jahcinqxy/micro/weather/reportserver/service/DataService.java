@@ -13,7 +13,7 @@ import java.util.List;
  * 因为 report 预报微服务依赖于城市微服务和天气数据微服务，因此，在使用统一网关后，
  * 便可以把原来的这两个服务的 feign 接口删除，统一使用 DataService
  */
-@FeignClient("micro-weather-zuul")
+@FeignClient(name = "micro-weather-zuul", fallback = DefaultFallBack.class)
 //@Service
 public interface DataService {
 

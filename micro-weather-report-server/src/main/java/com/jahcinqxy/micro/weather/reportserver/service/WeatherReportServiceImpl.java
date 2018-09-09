@@ -1,6 +1,5 @@
 package com.jahcinqxy.micro.weather.reportserver.service;
 
-import com.jahcinqxy.micro.weather.reportserver.vo.Daily;
 import com.jahcinqxy.micro.weather.reportserver.vo.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +25,8 @@ public class WeatherReportServiceImpl implements WeatherReportService {
 	@Override
 	public List<Weather> getDataByCityCode(String cityCode) {
 		//由天气数据API微服务来提供数据
+		if(data.getReportByCityCode(cityCode) == null)
+			return null;
 		return data.getReportByCityCode(cityCode).getResults();
 	}
 

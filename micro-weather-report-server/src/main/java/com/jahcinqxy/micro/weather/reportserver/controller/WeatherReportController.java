@@ -52,7 +52,10 @@ public class WeatherReportController {
 		model.addAttribute("title", "简易天气预报");
 		model.addAttribute("cityCode", cityCode);
 		model.addAttribute("cityList", cityList);
-		model.addAttribute("report", weatherReportService.getDataByCityCode(cityCode).get(0));
+		if(weatherReportService.getDataByCityCode(cityCode)==null)
+			model.addAttribute("report", null);
+		else
+			model.addAttribute("report", weatherReportService.getDataByCityCode(cityCode).get(0));
 		return new ModelAndView("weather/report", "reportModel", model);
 	}
 

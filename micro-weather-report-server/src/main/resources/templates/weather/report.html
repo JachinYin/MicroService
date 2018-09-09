@@ -18,52 +18,59 @@
 		<div class="row">
 			<h3 th:text="${reportModel.title}">Jachin</h3>
 		</div>
-		<div class="row">
-			<h1 class="text-success" th:text="${reportModel.report.location.name}"></h1>
-			<select class="custom-select" id="selectCityCode">
-				<option th:each="city : ${reportModel.cityList}"
-						th:value="${city.cityCode}" th:text="${city.cityName}"
-						th:selected="${city.cityCode eq reportModel.cityCode}">city</option>
-			</select>
-		</div>
-		<div class="row">
-			<p>
-				时区：<span th:text="${reportModel.report.location.timezone}"></span>
-			</p>
-			<p>
-				&emsp;最后更新：<span th:text="${reportModel.report.last_update}"></span>
-			</p>
 
+		<div th:if="${reportModel.report} == null">
+			<div class="row">
+				<span class="text-error">【Micro-weather-data-server】 Downed </span>
+			</div>
 		</div>
 
-
-		<div class="row">
-			<div class="card border-info" th:each="daily : ${reportModel.report.daily}">
-				<div class="card-body text-info">
-					<p class="card-text">
-						时间：<span  th:text="${daily.date}">2018-09-07</span>
-					</p>
-					<p class="card-text">
-						白昼天气：<span  th:text="${daily.text_day}">晴转多云</span>
-					</p>
-					<p class="card-text">
-						最高温：<span  th:text="${daily.high}">高温 28℃</span>
-					</p>
-					<p class="card-text">
-						最低温：<span  th:text="${daily.low}">低温 21℃</span>
-					</p>
-					<p class="card-text">
-						风向：<span  th:text="${daily.wind_direction}">无持续风向微风</span>
-					</p>
-					<p class="card-text">
-						风速：<span  th:text="${daily.wind_speed}">16</span>
-					</p>
-					<p class="card-text">
-						风力等级：<span  th:text="${daily.wind_scale}">2</span>
-					</p>
+		<div th:if="${reportModel.report} != null">
+			<div class="row">
+				<h1 class="text-info" th:text="${reportModel.report.location.name}"></h1>
+				<select class="custom-select" id="selectCityCode">
+					<option th:each="city : ${reportModel.cityList}"
+							th:value="${city.cityCode}" th:text="${city.cityName}"
+							th:selected="${city.cityCode eq reportModel.cityCode}">city</option>
+				</select>
+			</div>
+			<div class="row">
+				<p>
+					时区：<span th:text="${reportModel.report.location.timezone}"></span>
+				</p>
+				<p>
+					&emsp;最后更新：<span th:text="${reportModel.report.last_update}"></span>
+				</p>
+			</div>
+			<div class="row">
+				<div class="card border-info" th:each="daily : ${reportModel.report.daily}">
+					<div class="card-body text-success">
+						<p class="card-text">
+							时间：<span  th:text="${daily.date}">2018-09-07</span>
+						</p>
+						<p class="card-text">
+							白昼天气：<span  th:text="${daily.text_day}">晴转多云</span>
+						</p>
+						<p class="card-text">
+							最高温：<span  th:text="${daily.high}">高温 28℃</span>
+						</p>
+						<p class="card-text">
+							最低温：<span  th:text="${daily.low}">低温 21℃</span>
+						</p>
+						<p class="card-text">
+							风向：<span  th:text="${daily.wind_direction}">无持续风向微风</span>
+						</p>
+						<p class="card-text">
+							风速：<span  th:text="${daily.wind_speed}">16</span>
+						</p>
+						<p class="card-text">
+							风力等级：<span  th:text="${daily.wind_scale}">2</span>
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 
 
