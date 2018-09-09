@@ -4,8 +4,8 @@ buildscript {
     }
     repositories {
         // 配置镜像下载地址
-        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenLocal()
+        maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
         mavenCentral()
     }
     dependencies {
@@ -23,6 +23,8 @@ version = '1.0.0'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
+    maven {url 'http://maven.aliyun.com/nexus/content/groups/public/'}
     mavenCentral()
 }
 
@@ -33,6 +35,7 @@ ext {
 
 dependencies {
     compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-zuul')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
