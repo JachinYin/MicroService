@@ -1,5 +1,6 @@
 package com.jahcinqxy.micro.weather.reportserver.service;
 
+import com.jahcinqxy.micro.weather.reportserver.vo.Daily;
 import com.jahcinqxy.micro.weather.reportserver.vo.Weather;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,11 +15,11 @@ import java.util.List;
 @Service
 public class WeatherReportServiceImpl implements WeatherReportService {
 
-	private final WeatherDataApp data;
+	private final DataService data;
 
 	// 使用构造器注入
 	@Autowired
-	public WeatherReportServiceImpl(WeatherDataApp data) {
+	public WeatherReportServiceImpl(DataService data) {
 		this.data = data;
 	}	
 

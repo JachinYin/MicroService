@@ -1,6 +1,6 @@
 package com.jahcinqxy.micro.weather.reportserver.controller;
 
-import com.jahcinqxy.micro.weather.reportserver.service.CityApplication;
+import com.jahcinqxy.micro.weather.reportserver.service.DataService;
 import com.jahcinqxy.micro.weather.reportserver.service.WeatherReportService;
 import com.jahcinqxy.micro.weather.reportserver.vo.City;
 import org.slf4j.Logger;
@@ -28,11 +28,11 @@ public class WeatherReportController {
 	
 	private final WeatherReportService weatherReportService;
 
-	private final CityApplication city;
+	private final DataService city;
 
 
 	@Autowired
-	public WeatherReportController(WeatherReportService weatherReportService, CityApplication city) {
+	public WeatherReportController(WeatherReportService weatherReportService, DataService city) {
 		this.weatherReportService = weatherReportService;
 		this.city = city;
 	}
